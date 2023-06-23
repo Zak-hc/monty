@@ -33,5 +33,5 @@ void pall(stack_t **stack);
 void push(stack_t **stack, int n);
 typedef struct stack_s;
 void execute_instruction(char *opcode, char *arg);
-int main(int argc, char *argv[]);
+void (*f)(stack_t **stack, unsigned int line_number);
 #endif

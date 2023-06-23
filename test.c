@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define STACK_SIZE 100
-#include "monty.h"
-#include "5.c"
+
+typedef struct stack_s
+{
+    int n;
+    struct stack_s *prev;
+    struct stack_s *next;
+} stack_t;
+
 stack_t *stack = NULL;
 
 void push(stack_t **stack, int n)
@@ -21,6 +28,7 @@ void push(stack_t **stack, int n)
         (*stack)->prev = new_node;
     *stack = new_node;
 }
+
 void pall(stack_t **stack)
 {
     stack_t *current = *stack;
@@ -32,7 +40,7 @@ void pall(stack_t **stack)
 }
 void execute_instruction(char *opcode, char *arg)
 {
-	int n;
+    int n;
     if (strcmp(opcode, "push") == 0)
     {
         if (arg == NULL)
@@ -59,21 +67,25 @@ void execute_instruction(char *opcode, char *arg)
         exit(EXIT_FAILURE);
     }
 }
+
 int main(int argc, char *argv[])
 {
-	int line_number = 1;
-	FILE *file = fopen(argv[1], "r");
-	char line[100];
+    int line_number = 1;
+    FILE *file = fopen(argv[1], "r");
+    char line[100];
+
     if (argc != 2)
     {
         fprintf(stderr, "USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
+
     if (file == NULL)
     {
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
+
     while (fgets(line, sizeof(line), file))
     {
         char *opcode = strtok(line, " \t\n");
@@ -81,6 +93,7 @@ int main(int argc, char *argv[])
         execute_instruction(opcode, arg);
         line_number++;
     }
+
     fclose(file);
     return 0;
 }
