@@ -61,7 +61,8 @@ printf("%d\n", (*stack)->n);
  * @stack: jjjii
  * @line_number: yuhfgf
  */
-void execute_instruction(char *opcode, char *arg, stack_t **stack, unsigned int line_number)
+void execute_instruction(char *opcode, char *arg, stack_t **stack,
+unsigned int line_number)
 {
 (void)arg;
 if (strcmp(opcode, "push") == 0)
