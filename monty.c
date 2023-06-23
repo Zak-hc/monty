@@ -3,7 +3,21 @@
 #include <string.h>
 #define STACK_SIZE 100
 #include "monty.h"
-#include "5.c"
+/**
+ * push - Pushes an element to the stack.
+ * @stack: Pointer to the stack.
+ * @n: The element to push.
+ *
+ * pall - Prints all the values on the stack.
+ * @stack: Pointer to the stack.
+ *
+ * execute_instruction - Executes a Monty bytecode instruction.
+ *
+ * main - Entry point of the Monty interpreter.
+ * It parses the command-line arguments, reads and executes Monty bytecode
+ * instructions from a file.
+ */
+
 stack_t *stack = NULL;
 
 void push(stack_t **stack, int n)
