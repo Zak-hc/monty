@@ -42,7 +42,7 @@ current = current->next;
  * execute_instruction - Executes a Monty bytecode instruction.
  * @opcode: The opcode to execute.
  * @arg: The argument for the opcode.
- *
+ * @stack: jjjii
  */
 void execute_instruction(char *opcode, char *arg, stack_t **stack)
 {
