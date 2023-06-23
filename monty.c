@@ -44,7 +44,7 @@ current = current->next;
  * @arg: The argument for the opcode.
  *
  */
-void execute_instruction(char *opcode, char *arg)
+void execute_instruction(char *opcode, char *arg, stack_t **stack)
 {
 int n;
 if (strcmp(opcode, "push") == 0)
@@ -60,11 +60,11 @@ if (n == 0 && strcmp(arg, "0") != 0)
 fprintf(stderr, "Error: usage: push integer\n");
 exit(EXIT_FAILURE);
 }
-push(&stack, n);
+push(stack, n);
 }
 else if (strcmp(opcode, "pall") == 0)
 {
-pall(&stack);
+pall(stack);
 }
 else
 {
@@ -80,6 +80,7 @@ exit(EXIT_FAILURE);
  */
 int main(int argc, char *argv[])
 {
+stack_t *stack = NULL;
 int line_number = 1;
 FILE *file = fopen(argv[1], "r");
 char line[100];
@@ -97,7 +98,7 @@ while (fgets(line, sizeof(line), file))
 {
 char *opcode = strtok(line, " \t\n");
 char *arg = strtok(NULL, " \t\n");
-execute_instruction(opcode, arg);
+execute_instruction(opcode, arg, &stack);
 line_number++;
 }
 fclose(file);
