@@ -38,40 +38,49 @@ printf("%d\n", current->n);
 current = current->next;
 }
 }
+
+/**
+ * pint - Prints the value at the top of the stack.
+ * @stack: Pointer to the stack.
+ * @line_number: Current line number.
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+if (*stack == NULL)
+{
+fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+exit(EXIT_FAILURE);
+}
+printf("%d\n", (*stack)->n);
+}
+
 /**
  * execute_instruction - Executes a Monty bytecode instruction.
  * @opcode: The opcode to execute.
- * @arg: The argument for the opcode.
+ * @arg: jgygy
  * @stack: jjjii
+ * @line_number: yuhfgf
  */
-void execute_instruction(char *opcode, char *arg, stack_t **stack)
+void execute_instruction(char *opcode, char *arg, stack_t **stack, unsigned int line_number)
 {
-int n;
+(void)arg;
 if (strcmp(opcode, "push") == 0)
 {
-if (arg == NULL)
-{
-fprintf(stderr, "Error: usage: push integer\n");
-exit(EXIT_FAILURE);
-}
-n = atoi(arg);
-if (n == 0 && strcmp(arg, "0") != 0)
-{
-fprintf(stderr, "Error: usage: push integer\n");
-exit(EXIT_FAILURE);
-}
-push(stack, n);
 }
 else if (strcmp(opcode, "pall") == 0)
 {
-pall(stack);
+}
+else if (strcmp(opcode, "pint") == 0)
+{
+pint(stack, line_number);
 }
 else
 {
-fprintf(stderr, "Error: unknown instruction %s\n", opcode);
+fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 exit(EXIT_FAILURE);
 }
 }
+
 /**
  * main - Entry point of the Monty interpreter.
  * @argc: The number of command-line arguments.
@@ -81,7 +90,7 @@ exit(EXIT_FAILURE);
 int main(int argc, char *argv[])
 {
 stack_t *stack = NULL;
-int line_number = 1;
+unsigned int line_number = 1;
 FILE *file = fopen(argv[1], "r");
 char line[100];
 if (argc != 2)
@@ -98,7 +107,7 @@ while (fgets(line, sizeof(line), file))
 {
 char *opcode = strtok(line, " \t\n");
 char *arg = strtok(NULL, " \t\n");
-execute_instruction(opcode, arg, &stack);
+execute_instruction(opcode, arg, &stack, line_number);
 line_number++;
 }
 fclose(file);
