@@ -8,18 +8,7 @@
  * @stack: Pointer to the stack.
  * @n: The element to push.
  *
- * pall - Prints all the values on the stack.
- * @stack: Pointer to the stack.
- *
- * execute_instruction - Executes a Monty bytecode instruction.
- *
- * main - Entry point of the Monty interpreter.
- * It parses the command-line arguments, reads and executes Monty bytecode
- * instructions from a file.
  */
-
-stack_t *stack = NULL;
-
 void push(stack_t **stack, int n)
 {
 stack_t *new_node = malloc(sizeof(stack_t));
@@ -35,6 +24,11 @@ if (*stack != NULL)
 (*stack)->prev = new_node;
 *stack = new_node;
 }
+/**
+ * pall - Prints all the values on the stack.
+ * @stack: Pointer to the stack.
+ *
+ */
 void pall(stack_t **stack)
 {
 stack_t *current = *stack;
@@ -44,6 +38,12 @@ printf("%d\n", current->n);
 current = current->next;
 }
 }
+/**
+ * execute_instruction - Executes a Monty bytecode instruction.
+ * @opcode: The opcode to execute.
+ * @arg: The argument for the opcode.
+ *
+ */
 void execute_instruction(char *opcode, char *arg)
 {
 int n;
@@ -72,6 +72,12 @@ fprintf(stderr, "Error: unknown instruction %s\n", opcode);
 exit(EXIT_FAILURE);
 }
 }
+/**
+ * main - Entry point of the Monty interpreter.
+ * @argc: The number of command-line arguments.
+ * @argv: Array of command-line argument strings.
+ * Return: fnfnfjf 0 eej
+ */
 int main(int argc, char *argv[])
 {
 int line_number = 1;
